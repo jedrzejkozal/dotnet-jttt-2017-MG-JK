@@ -8,81 +8,60 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using System.Net; //conection to web page
-using System.IO;  //Stream and Stream reader
-using HtmlAgilityPack; //parse html
+
 
 namespace JTTT
 {
-    public partial class Form1 : Form
+    /*View in Model View ViewModel Pattern
+    Represent GUI (ONLY) - all elements of UserInterface + handelers for this elements.
+    Communicates with ViewModel*/
+    public partial class View : Form
     {
-        private WebClient client;
-        string ImgURL, Description;
+        private ViewModel VM;
 
-        public Form1()
+        public View()
         {
             InitializeComponent();
-            client = new WebClient();
+            //create ViewModel - this as argument in constructor gives ability to comunicate in both ways
+            VM = new ViewModel(this);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
+        private void Form1_Load(object sender, EventArgs e) {}
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Stream data = client.OpenRead(textBox1.Text);
-                StreamReader reader = new StreamReader(data);
-                string site = reader.ReadToEnd();
-
-                //search for images in html
-                var doc = new HtmlAgilityPack.HtmlDocument();
-                var pageHtml = site;
-                doc.LoadHtml(pageHtml);
-                var nodes = doc.DocumentNode.Descendants("img");
-                foreach (var node in nodes)
-                {
-                    if (node.GetAttributeValue("alt", "").Contains(textBox2.Text) && node.GetAttributeValue("src", "").Contains("http"))
-                    {
-                        
-                        ImgURL = node.GetAttributeValue("src", "");
-                        Description = node.GetAttributeValue("alt", "");
-                        //debug
-                        richTextBox1.Text = richTextBox1.Text + ImgURL + "\n";
-                        richTextBox1.Text = richTextBox1.Text + Description + "\n";
-                    }
-                }
-            }
-            catch(System.ArgumentException exception)
-            {
-                MessageBox.Show(exception.Message, "Blad!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            VM.getData(textBox1.Text, textBox2.Text);
+            VM.sendEmail();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (comboBox1.SelectedItem.ToString())
-            {
-                case "Szukaj po tagach":
-                    label1.Text = "Podaj adres URL:";
-                    label2.Text = "Podaj tag";
-                    textBox1.Text = "http://demotywatory.pl/";
-                    textBox2.Text = "Chin";
-                    break;
-                case "Szukaj w .txt":
+            VM.changeAction(comboBox1.SelectedItem.ToString());
+        }
 
-                    break;
-                case "Sprawdź pogodę":
+        //layout and look of view is dependent from aplication logic
+        //this method is a way to actualise a view whenever ViewModel needs it
+        public void changeView(Action action)
+        {
+            label1.Text = action.Label1Text;
+            label2.Text = action.Label2Text;
+            textBox1.Visible = action.isTextBox1Visible;
+            textBox2.Visible = action.isTextBox2Visible;
 
-                    break;
+            //for easier debug
+            textBox1.Text = "http://demotywatory.pl/";
+            textBox2.Text = "Chin";
+        }
 
-                default:
+        //very convenient way to work with exceptions in ViewModel
+        public void ShowMessageBoxError(string Message, string Title)
+        {
+            MessageBox.Show(Message, Title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
-                    break;
-            }
+        public void ShowDebugMessage(string msg)
+        {
+            richTextBox1.Text = richTextBox1.Text + msg;
         }
     }
 }
