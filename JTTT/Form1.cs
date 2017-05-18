@@ -10,12 +10,14 @@ using System.Windows.Forms;
 
 using System.Net; //conection to web page
 using System.IO;  //Stream and Stream reader
+using HtmlAgilityPack; //parse html
 
 namespace JTTT
 {
     public partial class Form1 : Form
     {
         private WebClient client;
+        string ImgURL, Description;
 
         public Form1()
         {
@@ -30,14 +32,29 @@ namespace JTTT
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //textBox1.Text =  "No elo";
             try
             {
-                //client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
                 Stream data = client.OpenRead(textBox1.Text);
                 StreamReader reader = new StreamReader(data);
-                string s = reader.ReadToEnd();
-                richTextBox1.Text = s;
+                string site = reader.ReadToEnd();
+
+                //search for images in html
+                var doc = new HtmlAgilityPack.HtmlDocument();
+                var pageHtml = site;
+                doc.LoadHtml(pageHtml);
+                var nodes = doc.DocumentNode.Descendants("img");
+                foreach (var node in nodes)
+                {
+                    if (node.GetAttributeValue("alt", "").Contains(textBox2.Text) && node.GetAttributeValue("src", "").Contains("http"))
+                    {
+                        
+                        ImgURL = node.GetAttributeValue("src", "");
+                        Description = node.GetAttributeValue("alt", "");
+                        //debug
+                        richTextBox1.Text = richTextBox1.Text + ImgURL + "\n";
+                        richTextBox1.Text = richTextBox1.Text + Description + "\n";
+                    }
+                }
             }
             catch(System.ArgumentException exception)
             {
@@ -47,13 +64,13 @@ namespace JTTT
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //textBox1.Text = comboBox1.SelectedItem.ToString();
             switch (comboBox1.SelectedItem.ToString())
             {
                 case "Szukaj po tagach":
                     label1.Text = "Podaj adres URL:";
                     label2.Text = "Podaj tag";
-                    
+                    textBox1.Text = "http://demotywatory.pl/";
+                    textBox2.Text = "Chin";
                     break;
                 case "Szukaj w .txt":
 
