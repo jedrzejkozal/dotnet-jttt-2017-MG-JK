@@ -63,10 +63,10 @@
             this.comboBox1.Items.AddRange(new object[] {
             "Szukaj po tagach",
             "Szukaj w .txt",
-            "Sprawdź pogodę"});
+            "Sprawdź pogodę we Wrocławiu"});
             this.comboBox1.Location = new System.Drawing.Point(416, 34);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.Size = new System.Drawing.Size(244, 21);
             this.comboBox1.TabIndex = 2;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -117,7 +117,7 @@
             // 
             this.richTextBox2.Location = new System.Drawing.Point(33, 340);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(467, 96);
+            this.richTextBox2.Size = new System.Drawing.Size(349, 96);
             this.richTextBox2.TabIndex = 9;
             this.richTextBox2.Text = "";
             // 
@@ -132,7 +132,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(907, 585);
+            this.ClientSize = new System.Drawing.Size(697, 490);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.button2);

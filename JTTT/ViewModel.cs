@@ -37,7 +37,7 @@ namespace JTTT
                 case "Szukaj w .txt":
                     action = new SearchTxt();
                     break;
-                case "Sprawdź pogodę":
+                case "Sprawdź pogodę we Wrocławiu":
                     action = new CheckWeather();
                     break;
                 default:
@@ -82,8 +82,7 @@ namespace JTTT
             msg.To.Add(new MailAddress(emailAddress));
             msg.IsBodyHtml = true;
             msg.Subject = "Something interesting for you";
-            msg.Body ="Adres URL:" + model.ImgURL + "\n Opis: \n" + model.Description;
-
+            msg.Body = "Adres URL:<br> <img src =\"" + model.ImgURL + "\" alt = \"tekst alternatywny\"/> <br>Opis: <br>" + model.Description;
             try
             {
                 smtp.Send(msg);
