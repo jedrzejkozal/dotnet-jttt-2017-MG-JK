@@ -31,7 +31,6 @@ namespace JTTT
         private void button1_Click(object sender, EventArgs e)
         {
             VM.getData(textBox1.Text, textBox2.Text);
-            VM.sendEmail();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -45,6 +44,7 @@ namespace JTTT
         {
             label1.Text = action.Label1Text;
             label2.Text = action.Label2Text;
+            label3.Text = action.Label3Text;
             textBox1.Visible = action.isTextBox1Visible;
             textBox2.Visible = action.isTextBox2Visible;
 
@@ -61,7 +61,19 @@ namespace JTTT
 
         public void ShowDebugMessage(string msg)
         {
-            richTextBox1.Text = richTextBox1.Text + msg;
+            richTextBox2.Text = richTextBox2.Text + msg;
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Text = "Adres został pobrany "+textBox3.Text;
+            richTextBox2.Text += VM.sendEmail(textBox3.Text);
+
         }
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Mail;
+using System.Net;
 
 namespace JTTT
 {
@@ -50,10 +52,10 @@ namespace JTTT
         {
             try
             {
-                EmailModel email = action.prepareEmail(arg1, arg2);
+                model = action.prepareEmail(arg1, arg2);
                 //debug
-                view.ShowDebugMessage(email.ImgURL);
-                view.ShowDebugMessage(email.Description);
+                view.ShowDebugMessage(model.ImgURL);
+                view.ShowDebugMessage(model.Description);
             }
             catch(System.ArgumentException exception)
             {
@@ -61,9 +63,37 @@ namespace JTTT
             }
         }
 
-        public void sendEmail()
+        public string sendEmail(string emailAddress)
         {
-            //to do
+
+            MailMessage msg = new MailMessage();
+            msg.From = new MailAddress("jttt.net@gmail.com");
+
+            SmtpClient smtp = new SmtpClient()
+            {
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential("jttt.net@gmail.com", "haslo1234"),
+                Host = "smtp.gmail.com"
+            };
+
+            msg.To.Add(new MailAddress(emailAddress));
+            msg.IsBodyHtml = true;
+            msg.Subject = "Something interesting for you";
+            msg.Body ="Adres URL:" + model.ImgURL + "\n Opis: \n" + model.Description;
+
+            try
+            {
+                smtp.Send(msg);
+                return "Message send..."+msg.Body.ToString();
+            }
+            catch (Exception ex)
+            {
+                string exp = ex.ToString();
+                return "Mail Not Sent ... and ther error is " + exp;
+            }
         }
     }
 }

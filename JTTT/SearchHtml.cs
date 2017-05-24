@@ -16,6 +16,7 @@ namespace JTTT
         {
             Label1Text = "Podaj adres URL:";
             Label2Text = "Podaj szukany tag";
+            Label3Text = "Podaj maila:";
             isTextBox1Visible = true;
             isTextBox2Visible = true;
         }

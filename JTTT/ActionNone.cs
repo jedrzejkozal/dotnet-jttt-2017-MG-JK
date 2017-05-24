@@ -12,6 +12,7 @@ namespace JTTT
         {
             Label1Text = "";
             Label2Text = "";
+            Label3Text = "";
             isTextBox1Visible = true;
             isTextBox2Visible = false;
         }
