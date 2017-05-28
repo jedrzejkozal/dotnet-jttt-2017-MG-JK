@@ -35,6 +35,11 @@ namespace JTTT
 
         private void button2_Click(object sender, EventArgs e)
         {
+            VM.addToList();
+        }
+
+        private void Perform_Click(object sender, EventArgs e)
+        {
             Debug.Text = "Adres został pobrany " + toTextBox.Text;
             Debug.Text += VM.send(toTextBox.Text);
         }
@@ -42,6 +47,11 @@ namespace JTTT
         private void actionSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
             VM.changeAction(actionSelect.SelectedItem.ToString());
+        }
+
+        private void Clear_Click(object sender, EventArgs e)
+        {
+            VM.clear();
         }
 
         //layout and look of view is dependent from aplication logic
@@ -65,6 +75,11 @@ namespace JTTT
             MessageBox.Show(Message, Title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        public void addSourceToList(BindingList<Tuple<DataModel, Action, NotificationMethod>> arg)
+        {
+            listBox1.DataSource = arg;
+        }
+
         public void ShowDebugMessage(string msg)
         {
             Debug.Text = Debug.Text + msg;
@@ -74,10 +89,5 @@ namespace JTTT
         {
             VM.changeNotificationMethod(comboBox1.SelectedItem.ToString());
         }
-        /*
-private void richTextBox1_TextChanged(object sender, EventArgs e)
-{
-
-}*/
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,9 @@ namespace JTTT
         Action action; //strategy design pattern
         NotificationMethod notificiation;
         ViewLayout viewlayout;
+        Tuple<DataModel, Action, NotificationMethod> tmp;
+        BindingList<Tuple<DataModel, Action, NotificationMethod>> list;
+        
 
         public ViewModel(View v)
         {
@@ -25,6 +29,8 @@ namespace JTTT
             notificiation = new NotificationNone();
             viewlayout = new ViewLayout(" ", " ", " ", true, false);
             view.changeView(viewlayout);
+            list = new BindingList<Tuple<DataModel, Action, NotificationMethod>>();
+            view.addSourceToList(list);
         }
 
         //Action class is used to store information what should be done and in wich way
@@ -66,15 +72,23 @@ namespace JTTT
             }
         }
 
+        public void addToList()
+        {
+            tmp = new Tuple<DataModel, Action, NotificationMethod>(model, action, notificiation);
+            list.Add(tmp);
+        }
+
+        public void clear()
+        {
+            list.Clear();
+        }
+
         //prepere data using avalible Models
         public void getData(string arg1, string arg2)
         {
             try
             {
                 model = action.prepareEmail(arg1, arg2);
-                //debug
-                view.ShowDebugMessage(model.ImgURL);
-                view.ShowDebugMessage(model.Description);
             }
             catch(System.ArgumentException exception)
             {
@@ -86,10 +100,6 @@ namespace JTTT
         {
             try
             {
-                //model = action.prepareEmail(arg1, arg2);
-                //debug
-                //view.ShowDebugMessage(model.ImgURL);
-                //view.ShowDebugMessage(model.Description);
                 model.adress = adress;
                 return notificiation.notify(model);
             }

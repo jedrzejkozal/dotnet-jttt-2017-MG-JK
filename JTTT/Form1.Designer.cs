@@ -41,6 +41,11 @@
             this.jesli = new System.Windows.Forms.Label();
             this.to = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.Perform = new System.Windows.Forms.Button();
+            this.Clear = new System.Windows.Forms.Button();
+            this.Desirialize = new System.Windows.Forms.Button();
+            this.Serialize = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // jesliTextBox1
@@ -52,9 +57,9 @@
             // 
             // confirm
             // 
-            this.confirm.Location = new System.Drawing.Point(413, 90);
+            this.confirm.Location = new System.Drawing.Point(398, 79);
             this.confirm.Name = "confirm";
-            this.confirm.Size = new System.Drawing.Size(75, 23);
+            this.confirm.Size = new System.Drawing.Size(118, 44);
             this.confirm.TabIndex = 1;
             this.confirm.Text = "Zatwierdż!";
             this.confirm.UseVisualStyleBackColor = true;
@@ -108,11 +113,11 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(413, 192);
+            this.button2.Location = new System.Drawing.Point(398, 195);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(118, 44);
             this.button2.TabIndex = 8;
-            this.button2.Text = "Wyślij!";
+            this.button2.Text = "Dodaj do listy";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -160,11 +165,62 @@
             this.comboBox1.TabIndex = 13;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(548, 18);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(361, 95);
+            this.listBox1.TabIndex = 14;
+            // 
+            // Perform
+            // 
+            this.Perform.Location = new System.Drawing.Point(548, 132);
+            this.Perform.Name = "Perform";
+            this.Perform.Size = new System.Drawing.Size(137, 50);
+            this.Perform.TabIndex = 15;
+            this.Perform.Text = "Wykonaj!";
+            this.Perform.UseVisualStyleBackColor = true;
+            this.Perform.Click += new System.EventHandler(this.Perform_Click);
+            // 
+            // Clear
+            // 
+            this.Clear.Location = new System.Drawing.Point(691, 132);
+            this.Clear.Name = "Clear";
+            this.Clear.Size = new System.Drawing.Size(137, 49);
+            this.Clear.TabIndex = 16;
+            this.Clear.Text = "Czyść";
+            this.Clear.UseVisualStyleBackColor = true;
+            this.Clear.Click += new System.EventHandler(this.Clear_Click);
+            // 
+            // Desirialize
+            // 
+            this.Desirialize.Location = new System.Drawing.Point(834, 132);
+            this.Desirialize.Name = "Desirialize";
+            this.Desirialize.Size = new System.Drawing.Size(75, 23);
+            this.Desirialize.TabIndex = 17;
+            this.Desirialize.Text = "Desirialize";
+            this.Desirialize.UseVisualStyleBackColor = true;
+            // 
+            // Serialize
+            // 
+            this.Serialize.Location = new System.Drawing.Point(834, 161);
+            this.Serialize.Name = "Serialize";
+            this.Serialize.Size = new System.Drawing.Size(75, 23);
+            this.Serialize.TabIndex = 18;
+            this.Serialize.Text = "Serialize";
+            this.Serialize.UseVisualStyleBackColor = true;
+            // 
             // View
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(553, 346);
+            this.ClientSize = new System.Drawing.Size(929, 346);
+            this.Controls.Add(this.Serialize);
+            this.Controls.Add(this.Desirialize);
+            this.Controls.Add(this.Clear);
+            this.Controls.Add(this.Perform);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.to);
             this.Controls.Add(this.jesli);
@@ -201,6 +257,11 @@
         private System.Windows.Forms.Label jesli;
         private System.Windows.Forms.Label to;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button Perform;
+        private System.Windows.Forms.Button Clear;
+        private System.Windows.Forms.Button Desirialize;
+        private System.Windows.Forms.Button Serialize;
     }
 }
 
