@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Net.Mail;
-using System.Net;
 
 namespace JTTT
 {
@@ -14,15 +12,19 @@ namespace JTTT
     class ViewModel
     {
         private View view;
-        private EmailModel model;
+        private DataModel model;
         Action action; //strategy design pattern
+        NotificationMethod notificiation;
+        ViewLayout viewlayout;
 
         public ViewModel(View v)
         {
             view = v;
-            model = new EmailModel();
+            model = new DataModel();
             action = new ActionNone();
-            view.changeView(action);
+            notificiation = new NotificationNone();
+            viewlayout = new ViewLayout(" ", " ", " ", true, false);
+            view.changeView(viewlayout);
         }
 
         //Action class is used to store information what should be done and in wich way
@@ -33,18 +35,35 @@ namespace JTTT
             {
                 case "Szukaj po tagach":
                     action = new SearchImageWebSite();
+                    viewlayout = new ViewLayout("Podaj adres URL:", "Podaj szukany tag", "Podaj maila:", true, true);
                     break;
                 case "Szukaj w .txt":
                     action = new SearchTxt();
                     break;
                 case "Sprawdź pogodę we Wrocławiu":
                     action = new CheckWeather();
+                    viewlayout = new ViewLayout("Podaj datę, w której chcesz sprawdzić pogodę w formacie RRRRMMDD"," ", "Podaj maila:", true, false);
                     break;
                 default:
                     action = new ActionNone();
+                    viewlayout = new ViewLayout(" ", " ", " ", true, false);
                     break;
             }
-            view.changeView(action);
+            view.changeView(viewlayout);
+        }
+
+        public void changeNotificationMethod(string newMethod)
+        {
+            view.ShowDebugMessage(newMethod);
+            switch (newMethod)
+            {
+                case "Wyślij email":
+                    notificiation = new NotificationEmail();
+                    break;
+                default:
+                    notificiation = new NotificationNone();
+                    break;
+            }
         }
 
         //prepere data using avalible Models
@@ -63,36 +82,23 @@ namespace JTTT
             }
         }
 
-        public string sendEmail(string emailAddress)
+        public string send(string adress)
         {
-
-            MailMessage msg = new MailMessage();
-            msg.From = new MailAddress("jttt.net@gmail.com");
-
-            SmtpClient smtp = new SmtpClient()
-            {
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("jttt.net@gmail.com", "haslo1234"),
-                Host = "smtp.gmail.com"
-            };
-
-            msg.To.Add(new MailAddress(emailAddress));
-            msg.IsBodyHtml = true;
-            msg.Subject = "Something interesting for you";
-            msg.Body = "Adres URL:<br> <img src =\"" + model.ImgURL + "\" alt = \"tekst alternatywny\"/> <br>Opis: <br>" + model.Description;
             try
             {
-                smtp.Send(msg);
-                return "Message send..."+msg.Body.ToString();
+                //model = action.prepareEmail(arg1, arg2);
+                //debug
+                //view.ShowDebugMessage(model.ImgURL);
+                //view.ShowDebugMessage(model.Description);
+                model.adress = adress;
+                return notificiation.notify(model);
             }
-            catch (Exception ex)
+            catch (System.ArgumentException exception)
             {
-                string exp = ex.ToString();
-                return "Mail Not Sent ... and ther error is " + exp;
+                view.ShowMessageBoxError(exception.Message, "Blad!");
+                return null;
             }
+
         }
     }
 }

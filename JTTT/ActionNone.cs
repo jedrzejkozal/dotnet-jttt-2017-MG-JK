@@ -10,14 +10,9 @@ namespace JTTT
     {
         public ActionNone()
         {
-            Label1Text = "";
-            Label2Text = "";
-            Label3Text = "";
-            isTextBox1Visible = true;
-            isTextBox2Visible = false;
         }
 
-        public override EmailModel prepareEmail(string arg1, string arg2)
+        public override DataModel prepareEmail(string arg1, string arg2)
         {
             System.ArgumentException ex = new System.ArgumentException("Wybierz akcję!");
             throw ex;

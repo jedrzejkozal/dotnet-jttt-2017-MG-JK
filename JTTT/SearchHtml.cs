@@ -14,18 +14,13 @@ namespace JTTT
     {
         public SearchImageWebSite()
         {
-            Label1Text = "Podaj adres URL:";
-            Label2Text = "Podaj szukany tag";
-            Label3Text = "Podaj maila:";
-            isTextBox1Visible = true;
-            isTextBox2Visible = true;
         }
 
-        public override EmailModel prepareEmail(string arg1, string arg2)
+        public override DataModel prepareEmail(string arg1, string arg2)
         {
             try
             {
-                EmailModel email = new EmailModel();
+                DataModel email = new DataModel();
                 WebClient client = new WebClient();
                 Stream data = client.OpenRead(arg1);
                 StreamReader reader = new StreamReader(data);

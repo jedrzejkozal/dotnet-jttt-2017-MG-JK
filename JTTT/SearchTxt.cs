@@ -8,9 +8,9 @@ namespace JTTT
 {
     public class SearchTxt : Action
     {
-        public override EmailModel prepareEmail(string arg1, string arg2)
+        public override DataModel prepareEmail(string arg1, string arg2)
         {
-            return new EmailModel();
+            return new DataModel();
         }
     }
 }

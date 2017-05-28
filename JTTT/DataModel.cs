@@ -9,8 +9,8 @@ namespace JTTT
     /*Model i M-V-MV represent only information about data and operations that could be done on them
     Model don't have any aplication logic.
     Can be useful when app uses a database*/
-    public class EmailModel
+    public class DataModel
     {
-        public string ImgURL, Description;
+        public string ImgURL, Description, adress;
     }
 }

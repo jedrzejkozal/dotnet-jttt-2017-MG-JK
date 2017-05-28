@@ -28,52 +28,55 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.jesliTextBox1 = new System.Windows.Forms.TextBox();
+            this.confirm = new System.Windows.Forms.Button();
+            this.actionSelect = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.jesliTextBox2 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.Debug = new System.Windows.Forms.RichTextBox();
+            this.toTextBox = new System.Windows.Forms.TextBox();
+            this.jesli = new System.Windows.Forms.Label();
+            this.to = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // textBox1
+            // jesliTextBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(30, 35);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(352, 20);
-            this.textBox1.TabIndex = 0;
+            this.jesliTextBox1.Location = new System.Drawing.Point(30, 72);
+            this.jesliTextBox1.Name = "jesliTextBox1";
+            this.jesliTextBox1.Size = new System.Drawing.Size(352, 20);
+            this.jesliTextBox1.TabIndex = 0;
             // 
-            // button1
+            // confirm
             // 
-            this.button1.Location = new System.Drawing.Point(218, 156);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Zatwierdż!";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.confirm.Location = new System.Drawing.Point(413, 90);
+            this.confirm.Name = "confirm";
+            this.confirm.Size = new System.Drawing.Size(75, 23);
+            this.confirm.TabIndex = 1;
+            this.confirm.Text = "Zatwierdż!";
+            this.confirm.UseVisualStyleBackColor = true;
+            this.confirm.Click += new System.EventHandler(this.confirm_Click);
             // 
-            // comboBox1
+            // actionSelect
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.actionSelect.FormattingEnabled = true;
+            this.actionSelect.Items.AddRange(new object[] {
             "Szukaj po tagach",
             "Szukaj w .txt",
             "Sprawdź pogodę we Wrocławiu"});
-            this.comboBox1.Location = new System.Drawing.Point(416, 34);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(244, 21);
-            this.comboBox1.TabIndex = 2;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.actionSelect.Location = new System.Drawing.Point(33, 12);
+            this.actionSelect.Name = "actionSelect";
+            this.actionSelect.Size = new System.Drawing.Size(244, 21);
+            this.actionSelect.TabIndex = 2;
+            this.actionSelect.SelectedIndexChanged += new System.EventHandler(this.actionSelect_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 19);
+            this.label1.Location = new System.Drawing.Point(30, 56);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(10, 13);
             this.label1.TabIndex = 3;
@@ -82,30 +85,30 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 95);
+            this.label2.Location = new System.Drawing.Point(30, 95);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(10, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = " ";
             // 
-            // textBox2
+            // jesliTextBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(30, 111);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(352, 20);
-            this.textBox2.TabIndex = 5;
+            this.jesliTextBox2.Location = new System.Drawing.Point(30, 111);
+            this.jesliTextBox2.Name = "jesliTextBox2";
+            this.jesliTextBox2.Size = new System.Drawing.Size(352, 20);
+            this.jesliTextBox2.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(30, 192);
+            this.label3.Location = new System.Drawing.Point(40, 169);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(0, 13);
             this.label3.TabIndex = 7;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(218, 293);
+            this.button2.Location = new System.Drawing.Point(413, 192);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 8;
@@ -113,36 +116,68 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // richTextBox2
+            // Debug
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(33, 340);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(349, 96);
-            this.richTextBox2.TabIndex = 9;
-            this.richTextBox2.Text = "";
+            this.Debug.Location = new System.Drawing.Point(30, 238);
+            this.Debug.Name = "Debug";
+            this.Debug.Size = new System.Drawing.Size(349, 96);
+            this.Debug.TabIndex = 9;
+            this.Debug.Text = "";
             // 
-            // textBox3
+            // toTextBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(33, 231);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(349, 20);
-            this.textBox3.TabIndex = 10;
+            this.toTextBox.Location = new System.Drawing.Point(30, 195);
+            this.toTextBox.Name = "toTextBox";
+            this.toTextBox.Size = new System.Drawing.Size(349, 20);
+            this.toTextBox.TabIndex = 10;
+            // 
+            // jesli
+            // 
+            this.jesli.AutoSize = true;
+            this.jesli.Location = new System.Drawing.Point(46, 36);
+            this.jesli.Name = "jesli";
+            this.jesli.Size = new System.Drawing.Size(30, 13);
+            this.jesli.TabIndex = 11;
+            this.jesli.Text = "Jeśli:";
+            // 
+            // to
+            // 
+            this.to.AutoSize = true;
+            this.to.Location = new System.Drawing.Point(46, 147);
+            this.to.Name = "to";
+            this.to.Size = new System.Drawing.Size(23, 13);
+            this.to.TabIndex = 12;
+            this.to.Text = "To:";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Wyślij email"});
+            this.comboBox1.Location = new System.Drawing.Point(33, 161);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(244, 21);
+            this.comboBox1.TabIndex = 13;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // View
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(697, 490);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.richTextBox2);
+            this.ClientSize = new System.Drawing.Size(553, 346);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.to);
+            this.Controls.Add(this.jesli);
+            this.Controls.Add(this.toTextBox);
+            this.Controls.Add(this.Debug);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.jesliTextBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.actionSelect);
+            this.Controls.Add(this.confirm);
+            this.Controls.Add(this.jesliTextBox1);
             this.Name = "View";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -153,16 +188,19 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox jesliTextBox1;
+        private System.Windows.Forms.Button confirm;
+        private System.Windows.Forms.ComboBox actionSelect;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox jesliTextBox2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.RichTextBox Debug;
+        private System.Windows.Forms.TextBox toTextBox;
+        private System.Windows.Forms.Label jesli;
+        private System.Windows.Forms.Label to;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

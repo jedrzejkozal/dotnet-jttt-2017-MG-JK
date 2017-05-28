@@ -12,17 +12,13 @@ namespace JTTT
     {
         public CheckWeather()
         {
-            Label1Text = "Podaj datę, w której chcesz sprawdzić pogodę w formacie RRRRMMDD";
-            Label3Text = "Podaj maila:";
-            isTextBox1Visible = true;
-            isTextBox2Visible = false;
         }
         
-        public override EmailModel prepareEmail(string arg1, string arg2)
+        public override DataModel prepareEmail(string arg1, string arg2)
         {
             try
             {
-                EmailModel email = new EmailModel();
+                DataModel email = new DataModel();
 
                 email.ImgURL = " http://www.meteo.pl/um/metco/mgram_pict.php?ntype=0u&fdate=" + arg1 + "12&row=436&col=181&lang=pl";
                 email.Description = "Pogoda dla Wrocławia w dniu " + arg1;

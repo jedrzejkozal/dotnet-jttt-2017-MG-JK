@@ -58,11 +58,15 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="EmailModel.cs" />
+    <Compile Include="DataModel.cs" />
+    <Compile Include="NotificationEmail.cs" />
+    <Compile Include="NotificationMethod.cs" />
+    <Compile Include="NotificationNone.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchHtml.cs" />
     <Compile Include="SearchTxt.cs" />
+    <Compile Include="ViewLayout.cs" />
     <Compile Include="ViewModel.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
