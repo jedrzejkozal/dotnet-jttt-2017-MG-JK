@@ -19,6 +19,7 @@ namespace JTTT
         ViewLayout viewlayout;
         Tuple<DataModel, Action, NotificationMethod> tmp;
         BindingList<Tuple<DataModel, Action, NotificationMethod>> list;
+        Log log;
         
 
         public ViewModel(View v)
@@ -31,6 +32,7 @@ namespace JTTT
             view.changeView(viewlayout);
             list = new BindingList<Tuple<DataModel, Action, NotificationMethod>>();
             view.addSourceToList(list);
+            log = new Log("log.log");
         }
 
         //Action class is used to store information what should be done and in wich way
@@ -40,14 +42,14 @@ namespace JTTT
             switch (newAction) //parse string to action
             {
                 case "Szukaj po tagach":
-                    action = new SearchImageWebSite();
+                    action = new SearchImageWebSite(log);
                     viewlayout = new ViewLayout("Podaj adres URL:", "Podaj szukany tag", "Podaj maila:", true, true);
                     break;
                 case "Szukaj w .txt":
                     action = new SearchTxt();
                     break;
                 case "Sprawdź pogodę we Wrocławiu":
-                    action = new CheckWeather();
+                    action = new CheckWeather(log);
                     viewlayout = new ViewLayout("Podaj datę, w której chcesz sprawdzić pogodę w formacie RRRRMMDD"," ", "Podaj maila:", true, false);
                     break;
                 default:
@@ -64,7 +66,7 @@ namespace JTTT
             switch (newMethod)
             {
                 case "Wyślij email":
-                    notificiation = new NotificationEmail();
+                    notificiation = new NotificationEmail(log);
                     break;
                 default:
                     notificiation = new NotificationNone();

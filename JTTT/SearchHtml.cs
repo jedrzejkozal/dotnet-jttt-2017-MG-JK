@@ -12,8 +12,11 @@ namespace JTTT
 {
     public class SearchImageWebSite : Action
     {
-        public SearchImageWebSite()
+        private Log log;
+
+        public SearchImageWebSite(Log _log)
         {
+            log = _log;
         }
 
         public override DataModel prepareEmail(string arg1, string arg2)
@@ -35,9 +38,9 @@ namespace JTTT
                 {
                     if (node.GetAttributeValue("alt", "").Contains(arg2) && node.GetAttributeValue("src", "").Contains("http"))
                     {
-
                         email.ImgURL = node.GetAttributeValue("src", "");
                         email.Description = node.GetAttributeValue("alt", "");
+                        log.logAction("Szukaj po tagach", email);
                     }
                 }
                 return email;

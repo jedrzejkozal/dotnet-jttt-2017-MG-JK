@@ -52,6 +52,7 @@
     <Compile Include="Action.cs" />
     <Compile Include="ActionNone.cs" />
     <Compile Include="CheckWeather.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

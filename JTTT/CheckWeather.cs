@@ -10,8 +10,11 @@ namespace JTTT
 {
     public class CheckWeather : Action
     {
-        public CheckWeather()
+        private Log log;
+
+        public CheckWeather(Log _log)
         {
+            log = _log;
         }
         
         public override DataModel prepareEmail(string arg1, string arg2)
@@ -22,6 +25,8 @@ namespace JTTT
 
                 email.ImgURL = " http://www.meteo.pl/um/metco/mgram_pict.php?ntype=0u&fdate=" + arg1 + "12&row=436&col=181&lang=pl";
                 email.Description = "Pogoda dla Wrocławia w dniu " + arg1;
+
+                log.logAction("Sprawdź pogodę we Wrocławiu", email);
 
                 return email;
             }

@@ -10,6 +10,13 @@ namespace JTTT
 {
     public class NotificationEmail : NotificationMethod
     {
+        private Log log;
+
+        public NotificationEmail(Log _log)
+        {
+            log = _log;
+        }
+
         public override string notify(DataModel arg)
         {
             MailMessage msg = new MailMessage();
@@ -31,11 +38,13 @@ namespace JTTT
             msg.Body = "Adres URL:<br> <img src =\"" + arg.ImgURL + "\" alt = \"tekst alternatywny\"/> <br>Opis: <br>" + arg.Description;
             try
             {
+                log.logNotification("Wyslij maila", arg, "Message send");
                 smtp.Send(msg);
                 return "Message send..." + msg.Body.ToString();
             }
             catch (Exception ex)
             {
+                log.logNotification("Wyslij maila", arg, "Mail Not Sent " + ex.ToString() );
                 string exp = ex.ToString();
                 return "Mail Not Sent ... and ther error is " + exp;
             }
