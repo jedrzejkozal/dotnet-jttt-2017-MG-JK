@@ -103,7 +103,7 @@ namespace JTTT
             try
             {
                 model.adress = adress;
-                return notificiation.notify(model);
+                return notificiation.notify(model, list);
             }
             catch (System.ArgumentException exception)
             {
