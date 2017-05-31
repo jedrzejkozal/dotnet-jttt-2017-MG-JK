@@ -172,6 +172,7 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(361, 95);
             this.listBox1.TabIndex = 14;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // Perform
             // 
@@ -201,6 +202,7 @@
             this.Desirialize.TabIndex = 17;
             this.Desirialize.Text = "Desirialize";
             this.Desirialize.UseVisualStyleBackColor = true;
+            this.Desirialize.Click += new System.EventHandler(this.Desirialize_Click);
             // 
             // Serialize
             // 
@@ -210,6 +212,7 @@
             this.Serialize.TabIndex = 18;
             this.Serialize.Text = "Serialize";
             this.Serialize.UseVisualStyleBackColor = true;
+            this.Serialize.Click += new System.EventHandler(this.Serialize_Click);
             // 
             // View
             // 

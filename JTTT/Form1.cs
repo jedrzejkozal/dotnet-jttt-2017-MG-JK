@@ -30,7 +30,7 @@ namespace JTTT
 
         private void confirm_Click(object sender, EventArgs e)
         {
-            VM.getData(jesliTextBox1.Text, jesliTextBox2.Text);
+            VM.getData(jesliTextBox1.Text, jesliTextBox2.Text, toTextBox.Text);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -40,8 +40,8 @@ namespace JTTT
 
         private void Perform_Click(object sender, EventArgs e)
         {
-            Debug.Text = "Adres został pobrany " + toTextBox.Text;
-            Debug.Text += VM.send(toTextBox.Text);
+            //Debug.Text = "Adres został pobrany " + toTextBox.Text;
+            Debug.Text += VM.send();
         }
 
         private void actionSelect_SelectedIndexChanged(object sender, EventArgs e)
@@ -88,6 +88,22 @@ namespace JTTT
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             VM.changeNotificationMethod(comboBox1.SelectedItem.ToString());
+        }
+
+        private void Serialize_Click(object sender, EventArgs e)
+        {
+            Debug.Text = VM.serialize();
+            VM.clear();
+        }
+
+        private void Desirialize_Click(object sender, EventArgs e)
+        {
+            Debug.Text = VM.deserialize();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
         }
     }
 }

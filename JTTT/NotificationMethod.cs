@@ -7,8 +7,14 @@ using System.Threading.Tasks;
 
 namespace JTTT
 {
+    [Serializable]
     public class NotificationMethod
     {
-        public virtual string notify(DataModel arg, BindingList<Tuple<DataModel, Action, NotificationMethod>> list) { /*string a = "base"; return a;*/ return null; }
+        public virtual string notify(BindingList<Tuple<DataModel, Action, NotificationMethod>> list) { /*string a = "base"; return a;*/ return null; }
+
+        public override string ToString()
+        {
+            return "".ToString();
+        }
     }
 }

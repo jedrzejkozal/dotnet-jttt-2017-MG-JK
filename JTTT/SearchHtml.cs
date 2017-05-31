@@ -10,6 +10,7 @@ using HtmlAgilityPack; //parse html
 
 namespace JTTT
 {
+    [Serializable]
     public class SearchImageWebSite : Action
     {
         private Log log;
@@ -19,7 +20,12 @@ namespace JTTT
             log = _log;
         }
 
-        public override DataModel prepareEmail(string arg1, string arg2)
+        public override string ToString()
+        {
+            return "SearchImageWebSite".ToString();
+        }
+
+        public override DataModel prepareEmail(string arg1, string arg2, string arg3)
         {
             try
             {
@@ -40,6 +46,7 @@ namespace JTTT
                     {
                         email.ImgURL = node.GetAttributeValue("src", "");
                         email.Description = node.GetAttributeValue("alt", "");
+                        email.adress = arg3;
                         log.logAction("Szukaj po tagach", email);
                     }
                 }

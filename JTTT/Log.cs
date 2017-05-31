@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace JTTT
 {
+    [Serializable]
     public class Log
     {
         private string fileName;

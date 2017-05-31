@@ -4,13 +4,16 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
+using System.IO;
 
 namespace JTTT
 {
     /*ViewModel is bridge beetwen View and Model
     Uses Models to operate on data, and react to events from View
     ViewModel has whole logic of program*/
-    class ViewModel
+    public class ViewModel
     {
         private View view;
         private DataModel model;
@@ -18,7 +21,7 @@ namespace JTTT
         NotificationMethod notificiation;
         ViewLayout viewlayout;
         Tuple<DataModel, Action, NotificationMethod> tmp;
-        BindingList<Tuple<DataModel, Action, NotificationMethod>> list;
+        public BindingList<Tuple<DataModel, Action, NotificationMethod>> list;
         Log log;
         
 
@@ -86,11 +89,11 @@ namespace JTTT
         }
 
         //prepere data using avalible Models
-        public void getData(string arg1, string arg2)
+        public void getData(string arg1, string arg2, string arg3)
         {
             try
             {
-                model = action.prepareEmail(arg1, arg2);
+                model = action.prepareEmail(arg1, arg2, arg3);
             }
             catch(System.ArgumentException exception)
             {
@@ -98,19 +101,65 @@ namespace JTTT
             }
         }
 
-        public string send(string adress)
+        public string send()
         {
             try
             {
-                model.adress = adress;
-                return notificiation.notify(model, list);
+                return notificiation.notify(list);
             }
             catch (System.ArgumentException exception)
             {
                 view.ShowMessageBoxError(exception.Message, "Blad!");
                 return null;
             }
+        }
 
+        public string serialize()
+        {
+            string retval = null;
+
+            FileStream fs = new FileStream("serialize.dat", FileMode.Create);
+
+            BinaryFormatter bf = new BinaryFormatter();
+
+            retval = "Po serializacji ";
+
+            foreach (var element in list)
+            {
+                retval += element.ToString();
+            }
+
+            bf.Serialize(fs, list);
+            fs.Close();
+
+            return retval;
+        }
+
+        public string deserialize()
+        {
+            string retval = null;
+
+            FileStream fs = new FileStream("serialize.dat", FileMode.Open);
+
+            BinaryFormatter bf = new BinaryFormatter();
+
+            var temp = (BindingList<Tuple<DataModel, Action, NotificationMethod>>)bf.Deserialize(fs);
+
+            foreach (var element in temp)
+            {
+                list.Add(element);
+            }
+
+            retval = "Po deserializacji ";
+
+            foreach (var element in list)
+            {
+                retval += element.ToString();
+            }
+
+            fs.Close();
+
+            return retval;
         }
     }
 }

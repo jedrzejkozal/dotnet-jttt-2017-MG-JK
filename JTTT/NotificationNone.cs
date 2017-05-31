@@ -7,12 +7,18 @@ using System.Threading.Tasks;
 
 namespace JTTT
 {
+    [Serializable]
     public class NotificationNone : NotificationMethod
     {
-        public override string notify(DataModel arg, BindingList<Tuple<DataModel, Action, NotificationMethod>> list)
+        public override string notify(BindingList<Tuple<DataModel, Action, NotificationMethod>> list)
         {
             System.ArgumentException ex = new System.ArgumentException("Wybierz sposób powiadomienia!");
             throw ex;
+        }
+
+        public override string ToString()
+        {
+            return "".ToString();
         }
     }
 }
