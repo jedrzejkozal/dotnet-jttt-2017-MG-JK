@@ -105,7 +105,8 @@ namespace JTTT
         {
             try
             {
-                return notificiation.notify(list);
+                var retval = notificiation.notify(list);
+                return retval;
             }
             catch (System.ArgumentException exception)
             {

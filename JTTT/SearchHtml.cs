@@ -27,14 +27,15 @@ namespace JTTT
 
         public override DataModel prepareEmail(string arg1, string arg2, string arg3)
         {
+            DataModel email = new DataModel();
+            WebClient client = new WebClient();
+            Stream data = client.OpenRead(arg1);
+            StreamReader reader = new StreamReader(data);
+            email.address = arg3;
+
             try
             {
-                DataModel email = new DataModel();
-                WebClient client = new WebClient();
-                Stream data = client.OpenRead(arg1);
-                StreamReader reader = new StreamReader(data);
                 string site = reader.ReadToEnd();
-
                 //search for images in html
                 var doc = new HtmlAgilityPack.HtmlDocument();
                 var pageHtml = site;
@@ -46,10 +47,10 @@ namespace JTTT
                     {
                         email.ImgURL = node.GetAttributeValue("src", "");
                         email.Description = node.GetAttributeValue("alt", "");
-                        email.adress = arg3;
                         log.logAction("Szukaj po tagach", email);
                     }
                 }
+                
                 return email;
             }
             catch (System.ArgumentException exception)

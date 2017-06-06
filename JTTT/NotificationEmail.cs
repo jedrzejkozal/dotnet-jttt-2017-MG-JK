@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
 using System.ComponentModel;
+using System.IO;
 
 namespace JTTT
 {
@@ -48,10 +49,11 @@ namespace JTTT
             foreach (var element in list)
             {
                 WebClient webClient = new WebClient();
+                var imgPath = Path.GetTempFileName();
 
                 try
                 {
-                    webClient.DownloadFile(element.Item1.ImgURL, "temp.png");
+                    webClient.DownloadFile(element.Item1.ImgURL, imgPath);
                 }
                 catch (WebException e)
                 {
@@ -59,20 +61,21 @@ namespace JTTT
                 }
 
                 MailMessage msg = new MailMessage();
-                msg.Attachments.Add(new Attachment("temp.png"));
+                msg.Attachments.Add(new Attachment(imgPath));
                 msg.From = new MailAddress("jttt.net@gmail.com");
-                msg.To.Add(new MailAddress(element.Item1.adress));
+                msg.To.Add(new MailAddress(element.Item1.address));
                 msg.IsBodyHtml = true;
                 msg.Subject = "Something interesting for you";
                 msg.Body = "Opis: " + element.Item1.Description;
+                log.logDebug("Notification email", element.Item1.address);
 
-                email.Add(element.Item1.adress);
+                email.Add(element.Item1.address);
 
                 try
                 {
                     log.logNotification("Wyslij maila", element.Item1, "Message send");
                     smtp.Send(msg);
-                    retval += "Message send..." + element.Item1.adress + msg.Body.ToString();
+                    retval += "Message send..." + element.Item1.address + msg.Body.ToString();
                 }
                 catch (Exception ex)
                 {

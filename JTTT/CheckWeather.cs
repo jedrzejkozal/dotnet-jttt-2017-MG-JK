@@ -31,7 +31,7 @@ namespace JTTT
 
                 email.ImgURL = " http://www.meteo.pl/um/metco/mgram_pict.php?ntype=0u&fdate=" + arg1 + "12&row=436&col=181&lang=pl";
                 email.Description = "Pogoda dla Wrocławia w dniu " + arg1;
-                email.adress = arg3;
+                email.address = arg3;
 
                 log.logAction("Sprawdź pogodę we Wrocławiu", email);
 

@@ -13,11 +13,11 @@ namespace JTTT
     [Serializable]
     public class DataModel
     {
-        public string ImgURL, Description, adress;
+        public string ImgURL, Description, address;
 
         public override string ToString()
         {
-            return string.Format("URL {0} ADRESS {1}", ImgURL, adress);
+            return string.Format("URL {0} ADRESS {1}", ImgURL, address);
         }
     }
 }

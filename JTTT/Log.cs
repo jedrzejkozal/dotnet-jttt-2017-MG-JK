@@ -22,6 +22,16 @@ namespace JTTT
             }
         }
 
+        public void logDebug(string action, string element)
+        {
+            if (File.Exists(fileName))
+            {
+                StreamWriter sw = new StreamWriter(fileName, true);
+                sw.WriteLine(action + " " + DateTime.Now + " " + element);
+                sw.Close();
+            }
+        }
+
         public void logAction(string action, DataModel content)
         {
             if (File.Exists(fileName))
@@ -42,7 +52,7 @@ namespace JTTT
                 StreamWriter sw = new StreamWriter(fileName, true);
                 sw.WriteLine("Czas " + DateTime.Now);
                 sw.WriteLine("Akcja " + action);
-                sw.WriteLine("Adres " + content.adress);
+                sw.WriteLine("Adres " + content.address);
                 sw.WriteLine("Rezultat " + result);
                 sw.WriteLine();
                 sw.Close();
