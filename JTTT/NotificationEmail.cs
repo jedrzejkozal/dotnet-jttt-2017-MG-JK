@@ -63,7 +63,9 @@ namespace JTTT
                 MailMessage msg = new MailMessage();
                 msg.Attachments.Add(new Attachment(imgPath));
                 msg.From = new MailAddress("jttt.net@gmail.com");
-                msg.To.Add(new MailAddress(element.Item1.address));
+
+                msg.To.Add(new MailAddress(element.Item1.address)); //throws System.FormatException
+
                 msg.IsBodyHtml = true;
                 msg.Subject = "Something interesting for you";
                 msg.Body = "Opis: " + element.Item1.Description;

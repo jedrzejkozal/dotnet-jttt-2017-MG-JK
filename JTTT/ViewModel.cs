@@ -108,6 +108,11 @@ namespace JTTT
                 var retval = notificiation.notify(list);
                 return retval;
             }
+            catch (System.FormatException exception)
+            {
+                view.ShowMessageBoxError(exception.Message+" Wskazówka: po podaniu adresu email naciśnij zatwierdź", "Blad!");
+                return null;
+            }
             catch (System.ArgumentException exception)
             {
                 view.ShowMessageBoxError(exception.Message, "Blad!");
