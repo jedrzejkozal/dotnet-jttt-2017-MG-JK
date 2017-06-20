@@ -28,13 +28,15 @@ namespace JTTT
 
         private void Form1_Load(object sender, EventArgs e) {}
 
+        
         private void confirm_Click(object sender, EventArgs e)
         {
-            VM.getData(jesliTextBox1.Text, jesliTextBox2.Text, toTextBox.Text);
+           
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            VM.getData(jesliTextBox1.Text, jesliTextBox2.Text, toTextBox.Text);
             VM.addToList();
         }
 

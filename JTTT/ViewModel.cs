@@ -23,6 +23,7 @@ namespace JTTT
         Tuple<DataModel, Action, NotificationMethod> tmp;
         public BindingList<Tuple<DataModel, Action, NotificationMethod>> list;
         Log log;
+        String tmp1, tmp2, tmp3;
         
 
         public ViewModel(View v)
@@ -93,7 +94,11 @@ namespace JTTT
         {
             try
             {
-                model = action.prepareEmail(arg1, arg2, arg3);
+                model = new DataModel(); //action.prepareEmail(arg1, arg2, arg3);
+                //workaround - args (strings from text boxes) are stored temporarly, then they are used when we need to notify (send mail or something)
+                model.address = arg1;
+                model.Description = arg2;
+                model.ImgURL = arg3;
             }
             catch(System.ArgumentException exception)
             {
@@ -103,6 +108,16 @@ namespace JTTT
 
         public string send()
         {
+            //hack from getData - part2: based on strings from view stored in model, 
+            //create up-to-date model components
+            //all of this is to avoid changes in working code, and lack of time of course
+            foreach (var element in list)
+            {
+                DataModel exact = action.prepareEmail(element.Item1.address, element.Item1.Description, element.Item1.ImgURL);
+                element.Item1.address = exact.address;
+                element.Item1.Description = exact.Description;
+                element.Item1.ImgURL = exact.ImgURL;
+            }
             try
             {
                 var retval = notificiation.notify(list);
