@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.IO;
+using System.Data.Entity;
 
 namespace JTTT
 {
@@ -23,8 +24,8 @@ namespace JTTT
         Tuple<DataModel, Action, NotificationMethod> tmp;
         public BindingList<Tuple<DataModel, Action, NotificationMethod>> list;
         Log log;
-        String tmp1, tmp2, tmp3;
-        
+
+
 
         public ViewModel(View v)
         {
@@ -37,6 +38,32 @@ namespace JTTT
             list = new BindingList<Tuple<DataModel, Action, NotificationMethod>>();
             view.addSourceToList(list);
             log = new Log("log.log");
+            
+            using (var db = new ModelContext())
+            {
+                var query = from b in db.Models
+                            orderby b.ModelId
+                            select b;
+                view.ShowMessageBoxError("Qeuryset"+query.ToString(),"q");
+                foreach (var item in query)
+                {
+                    view.ShowMessageBoxError("Qeuryset" + item.ImgURL, "q");
+                    list.Add(new Tuple<DataModel, Action, NotificationMethod>(new DataModel(item.ImgURL, item.Description, item.address), new Action(), new NotificationMethod()));
+                }
+            }
+        }
+
+        ~ViewModel()
+        {
+            using (var db = new ModelContext())
+            {
+                foreach (var element in list)
+                {
+                    Model m = new Model { ImgURL = element.Item1.ImgURL, Description = element.Item1.Description, address = element.Item1.address };
+                    db.Models.Add(m);
+                }
+                db.SaveChanges();
+            }
         }
 
         //Action class is used to store information what should be done and in wich way
