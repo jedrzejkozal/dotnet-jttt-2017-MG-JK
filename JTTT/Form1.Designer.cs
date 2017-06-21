@@ -46,6 +46,7 @@
             this.Clear = new System.Windows.Forms.Button();
             this.Desirialize = new System.Windows.Forms.Button();
             this.Serialize = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // jesliTextBox1
@@ -71,7 +72,8 @@
             this.actionSelect.Items.AddRange(new object[] {
             "Szukaj po tagach",
             "Szukaj w .txt",
-            "Sprawdź pogodę we Wrocławiu"});
+            "Sprawdź pogodę we Wrocławiu wykres",
+            "Sprawdź pogodę w"});
             this.actionSelect.Location = new System.Drawing.Point(33, 12);
             this.actionSelect.Name = "actionSelect";
             this.actionSelect.Size = new System.Drawing.Size(244, 21);
@@ -214,11 +216,23 @@
             this.Serialize.UseVisualStyleBackColor = true;
             this.Serialize.Click += new System.EventHandler(this.Serialize_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(398, 25);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(118, 44);
+            this.button1.TabIndex = 19;
+            this.button1.Text = "Sprawdź pogodę";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // View
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(929, 346);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.Serialize);
             this.Controls.Add(this.Desirialize);
             this.Controls.Add(this.Clear);
@@ -265,6 +279,7 @@
         private System.Windows.Forms.Button Clear;
         private System.Windows.Forms.Button Desirialize;
         private System.Windows.Forms.Button Serialize;
+        private System.Windows.Forms.Button button1;
     }
 }
 

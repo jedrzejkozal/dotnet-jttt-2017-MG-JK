@@ -65,6 +65,7 @@ namespace JTTT
             label3.Text = action.Label3Text;
             jesliTextBox1.Visible = action.isTextBox1Visible;
             jesliTextBox2.Visible = action.isTextBox2Visible;
+            button1.Visible = action.isButton1Visible;
 
             //for easier debug
             jesliTextBox1.Text = "http://demotywatory.pl/";
@@ -106,6 +107,11 @@ namespace JTTT
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -32,7 +32,7 @@ namespace JTTT
             model = new DataModel();
             action = new ActionNone();
             notificiation = new NotificationNone();
-            viewlayout = new ViewLayout(" ", " ", " ", true, false);
+            viewlayout = new ViewLayout(" ", " ", " ", true, false, false);
             view.changeView(viewlayout);
             list = new BindingList<Tuple<DataModel, Action, NotificationMethod>>();
             view.addSourceToList(list);
@@ -53,6 +53,9 @@ namespace JTTT
                     } else if (item.action == "SearchTxt")
                     {
                         action = new SearchTxt();
+                    } else if (item.action == "CheckWeatherJson")
+                    {
+                        action = new CheckWeatherJson(log);
                     }
                     list.Add(new Tuple<DataModel, Action, NotificationMethod>(new DataModel(item.ImgURL, item.Description, item.address), action, new NotificationMethod()));
                 }
@@ -67,18 +70,22 @@ namespace JTTT
             {
                 case "Szukaj po tagach":
                     action = new SearchImageWebSite(log);
-                    viewlayout = new ViewLayout("Podaj adres URL:", "Podaj szukany tag", "Podaj maila:", true, true);
+                    viewlayout = new ViewLayout("Podaj adres URL:", "Podaj szukany tag", "Podaj maila:", true, true, false);
                     break;
                 case "Szukaj w .txt":
                     action = new SearchTxt();
                     break;
-                case "Sprawdź pogodę we Wrocławiu":
+                case "Sprawdź pogodę we Wrocławiu wykres":
                     action = new CheckWeather(log);
-                    viewlayout = new ViewLayout("Podaj datę, w której chcesz sprawdzić pogodę w formacie RRRRMMDD"," ", "Podaj maila:", true, false);
+                    viewlayout = new ViewLayout("Podaj datę, w której chcesz sprawdzić pogodę w formacie RRRRMMDD"," ", "Podaj maila:", true, false, false);
+                    break;
+                case "Sprawdź pogodę w":
+                    action = new CheckWeatherJson(log);
+                    viewlayout = new ViewLayout("Podaj miasto, w którym chcesz sprawdzić pogodę", " ", "Podaj maila:", true, false, true);
                     break;
                 default:
                     action = new ActionNone();
-                    viewlayout = new ViewLayout(" ", " ", " ", true, false);
+                    viewlayout = new ViewLayout(" ", " ", " ", true, false, false);
                     break;
             }
             view.changeView(viewlayout);
