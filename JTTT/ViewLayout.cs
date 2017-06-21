@@ -9,7 +9,7 @@ namespace JTTT
     public class ViewLayout
     {
         public string Label1Text, Label2Text, Label3Text;
-        public bool isTextBox1Visible, isTextBox2Visible, isButton1Visible;
+        public bool isTextBox1Visible, isTextBox2Visible, isButton1Visible, isWeatherBoxVisible, isWeatherPictureVisible;
 
         public ViewLayout()
         {
@@ -25,6 +25,8 @@ namespace JTTT
             isTextBox1Visible = _is1Visible;
             isTextBox2Visible = _is2Visible;
             isButton1Visible = _isButtonVisible;
+            isWeatherBoxVisible = _isButtonVisible;
+            isWeatherPictureVisible = _isButtonVisible;
         }
     }
 }

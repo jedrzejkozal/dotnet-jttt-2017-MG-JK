@@ -66,6 +66,8 @@ namespace JTTT
             jesliTextBox1.Visible = action.isTextBox1Visible;
             jesliTextBox2.Visible = action.isTextBox2Visible;
             button1.Visible = action.isButton1Visible;
+            weatherBox.Visible = action.isWeatherBoxVisible;
+            weatherPicture.Visible = action.isWeatherPictureVisible;
 
             //for easier debug
             jesliTextBox1.Text = "http://demotywatory.pl/";
@@ -111,7 +113,16 @@ namespace JTTT
 
         private void button1_Click(object sender, EventArgs e)
         {
+            weatherBox.Text = VM.show_weather(jesliTextBox1.Text);
+            weatherPicture.Image = Image.FromFile(VM.show_picture(jesliTextBox1.Text));
+        }
 
+        private void weatherBox_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void weatherPicture_Click(object sender, EventArgs e)
+        {
         }
     }
 }

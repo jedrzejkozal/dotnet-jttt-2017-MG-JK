@@ -47,6 +47,9 @@
             this.Desirialize = new System.Windows.Forms.Button();
             this.Serialize = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.weatherBox = new System.Windows.Forms.RichTextBox();
+            this.weatherPicture = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.weatherPicture)).BeginInit();
             this.SuspendLayout();
             // 
             // jesliTextBox1
@@ -227,11 +230,31 @@
             this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // weatherBox
+            // 
+            this.weatherBox.Location = new System.Drawing.Point(548, 238);
+            this.weatherBox.Name = "weatherBox";
+            this.weatherBox.Size = new System.Drawing.Size(244, 96);
+            this.weatherBox.TabIndex = 20;
+            this.weatherBox.Text = "";
+            this.weatherBox.TextChanged += new System.EventHandler(this.weatherBox_TextChanged);
+            // 
+            // weatherPicture
+            // 
+            this.weatherPicture.Location = new System.Drawing.Point(809, 238);
+            this.weatherPicture.Name = "weatherPicture";
+            this.weatherPicture.Size = new System.Drawing.Size(100, 96);
+            this.weatherPicture.TabIndex = 21;
+            this.weatherPicture.TabStop = false;
+            this.weatherPicture.Click += new System.EventHandler(this.weatherPicture_Click);
+            // 
             // View
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(929, 346);
+            this.Controls.Add(this.weatherPicture);
+            this.Controls.Add(this.weatherBox);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.Serialize);
             this.Controls.Add(this.Desirialize);
@@ -254,6 +277,7 @@
             this.Name = "View";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.weatherPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -280,6 +304,8 @@
         private System.Windows.Forms.Button Desirialize;
         private System.Windows.Forms.Button Serialize;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RichTextBox weatherBox;
+        private System.Windows.Forms.PictureBox weatherPicture;
     }
 }
 

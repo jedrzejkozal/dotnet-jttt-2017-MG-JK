@@ -175,6 +175,16 @@ namespace JTTT
             return null;
         }
 
+        public string show_weather(string arg1)
+        {
+            return new CheckWeatherJson(log).getDescribe(arg1);
+        }
+
+        public string show_picture(string arg1)
+        {
+            return new CheckWeatherJson(log).getImage(arg1); ;
+        }
+
         public string serialize()
         {
             string retval = null;
