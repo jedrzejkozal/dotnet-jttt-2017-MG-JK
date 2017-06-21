@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.IO;
+using System.Data.Entity;
 
 namespace JTTT
 {
@@ -23,7 +24,6 @@ namespace JTTT
         Tuple<DataModel, Action, NotificationMethod> tmp;
         public BindingList<Tuple<DataModel, Action, NotificationMethod>> list;
         Log log;
-        String tmp1, tmp2, tmp3;
         
 
         public ViewModel(View v)
@@ -37,6 +37,26 @@ namespace JTTT
             list = new BindingList<Tuple<DataModel, Action, NotificationMethod>>();
             view.addSourceToList(list);
             log = new Log("log.log");
+            using (var db = new ModelContext())
+            {
+                var query = db.Model.ToList();
+
+                foreach (var item in query)
+                {
+                    Action action = null;
+                    if (item.action == "CheckWeather")
+                    {
+                        action = new CheckWeather(log);
+                    } else if (item.action == "SearchImageWebSite")
+                    {
+                        action = new SearchImageWebSite(log);
+                    } else if (item.action == "SearchTxt")
+                    {
+                        action = new SearchTxt();
+                    }
+                    list.Add(new Tuple<DataModel, Action, NotificationMethod>(new DataModel(item.ImgURL, item.Description, item.address), action, new NotificationMethod()));
+                }
+            }
         }
 
         //Action class is used to store information what should be done and in wich way
@@ -82,11 +102,23 @@ namespace JTTT
         {
             tmp = new Tuple<DataModel, Action, NotificationMethod>(model, action, notificiation);
             list.Add(tmp);
+            using (var context = new ModelContext())
+            {
+                Model modeldb = new Model { ImgURL = model.ImgURL, Description = model.Description, address = model.address, action = action.ToString() };
+                context.Model.Add(modeldb);
+                context.SaveChanges();
+            }
         }
 
         public void clear()
         {
             list.Clear();
+            using (var context = new ModelContext())
+            {
+                var itemsToDelete = context.Set<Model>();
+                context.Model.RemoveRange(itemsToDelete);
+                context.SaveChanges();
+            }
         }
 
         //prepere data using avalible Models
@@ -113,26 +145,27 @@ namespace JTTT
             //all of this is to avoid changes in working code, and lack of time of course
             foreach (var element in list)
             {
-                DataModel exact = action.prepareEmail(element.Item1.address, element.Item1.Description, element.Item1.ImgURL);
+                DataModel exact = element.Item2.prepareEmail(element.Item1.address, element.Item1.Description, element.Item1.ImgURL);
                 element.Item1.address = exact.address;
                 element.Item1.Description = exact.Description;
                 element.Item1.ImgURL = exact.ImgURL;
+                try
+                {
+                    var retval = element.Item3.notify(element.Item1);
+                    return retval;
+                }
+                catch (System.FormatException exception)
+                {
+                    view.ShowMessageBoxError(exception.Message + " Wskazówka: po podaniu adresu email naciśnij zatwierdź", "Blad!");
+                    return null;
+                }
+                catch (System.ArgumentException exception)
+                {
+                    view.ShowMessageBoxError(exception.Message, "Blad!");
+                    return null;
+                }
             }
-            try
-            {
-                var retval = notificiation.notify(list);
-                return retval;
-            }
-            catch (System.FormatException exception)
-            {
-                view.ShowMessageBoxError(exception.Message+" Wskazówka: po podaniu adresu email naciśnij zatwierdź", "Blad!");
-                return null;
-            }
-            catch (System.ArgumentException exception)
-            {
-                view.ShowMessageBoxError(exception.Message, "Blad!");
-                return null;
-            }
+            return null;
         }
 
         public string serialize()

@@ -10,7 +10,7 @@ namespace JTTT
     [Serializable]
     public class NotificationMethod
     {
-        public virtual string notify(BindingList<Tuple<DataModel, Action, NotificationMethod>> list) { /*string a = "base"; return a;*/ return null; }
+        public virtual string notify(DataModel data_model) { /*string a = "base"; return a;*/ return null; }
 
         public override string ToString()
         {

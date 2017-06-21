@@ -19,5 +19,12 @@ namespace JTTT
         {
             return string.Format("URL {0} ADRESS {1}", ImgURL, address);
         }
-    }
+         public DataModel(string a, string b, string c)
+         {
+             ImgURL = a;
+             Description = b;
+             address = c;
+         }
+         public DataModel() { }
+}
 }

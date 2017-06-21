@@ -10,7 +10,7 @@ namespace JTTT
     [Serializable]
     public class NotificationNone : NotificationMethod
     {
-        public override string notify(BindingList<Tuple<DataModel, Action, NotificationMethod>> list)
+        public override string notify(DataModel data_model)
         {
             System.ArgumentException ex = new System.ArgumentException("Wybierz sposób powiadomienia!");
             throw ex;

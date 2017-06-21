@@ -11,8 +11,10 @@ namespace JTTT
     [Serializable]
     public class Action
     {
-        public virtual DataModel prepareEmail(string arg1, string arg2, string arg3) { return new DataModel(); }
+        public string action { get; set; }
 
+        public virtual DataModel prepareEmail(string arg1, string arg2, string arg3) { return new DataModel(); }
+        
         public override string ToString()
         {
             return "".ToString();

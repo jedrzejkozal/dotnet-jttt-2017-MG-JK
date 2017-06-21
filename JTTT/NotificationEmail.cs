@@ -32,7 +32,7 @@ namespace JTTT
             return retval;
         }
 
-        public override string notify(BindingList<Tuple<DataModel, Action, NotificationMethod>> list)
+        public override string notify(DataModel data_model)
         {
             string retval = null;
 
@@ -46,14 +46,12 @@ namespace JTTT
                 Host = "smtp.gmail.com"
             };
 
-            foreach (var element in list)
-            {
                 WebClient webClient = new WebClient();
-                var imgPath = Path.GetTempFileName();
+                var imgPath = Path.GetTempFileName().Replace(".tmp", ".jpg");
 
                 try
                 {
-                    webClient.DownloadFile(element.Item1.ImgURL, imgPath);
+                    webClient.DownloadFile(data_model.ImgURL, imgPath);
                 }
                 catch (WebException e)
                 {
@@ -64,28 +62,27 @@ namespace JTTT
                 msg.Attachments.Add(new Attachment(imgPath));
                 msg.From = new MailAddress("jttt.net@gmail.com");
 
-                msg.To.Add(new MailAddress(element.Item1.address)); //throws System.FormatException
+                msg.To.Add(new MailAddress(data_model.address)); //throws System.FormatException
 
                 msg.IsBodyHtml = true;
                 msg.Subject = "Something interesting for you";
-                msg.Body = "Opis: " + element.Item1.Description;
-                log.logDebug("Notification email", element.Item1.address);
+                msg.Body = "Opis: " + data_model.Description;
+                log.logDebug("Notification email", data_model.address);
 
-                email.Add(element.Item1.address);
+                email.Add(data_model.address);
 
                 try
                 {
-                    log.logNotification("Wyslij maila", element.Item1, "Message send");
+                    log.logNotification("Wyslij maila", data_model, "Message send");
                     smtp.Send(msg);
-                    retval += "Message send..." + element.Item1.address + msg.Body.ToString();
+                    retval += "Message send..." + data_model.address + msg.Body.ToString();
                 }
                 catch (Exception ex)
                 {
-                    log.logNotification("Wyslij maila", element.Item1, "Mail Not Sent " + ex.ToString());
+                    log.logNotification("Wyslij maila", data_model, "Mail Not Sent " + ex.ToString());
                     string exp = ex.ToString();
                     retval += "Mail Not Sent ... and ther error is " + exp;
                 }
-            }
 
             return retval;
         }
