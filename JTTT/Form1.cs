@@ -70,8 +70,8 @@ namespace JTTT
             weatherPicture.Visible = action.isWeatherPictureVisible;
 
             //for easier debug
-            jesliTextBox1.Text = "http://demotywatory.pl/";
-            jesliTextBox2.Text = "Chin";
+            jesliTextBox1.Text = "";
+            jesliTextBox2.Text = "";
         }
 
         //very convenient way to work with exceptions in ViewModel

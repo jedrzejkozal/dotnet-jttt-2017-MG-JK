@@ -43,7 +43,6 @@ namespace JTTT
 
                 foreach (var item in query)
                 {
-                    Action action = null;
                     if (item.action == "CheckWeather")
                     {
                         action = new CheckWeather(log);
@@ -57,7 +56,15 @@ namespace JTTT
                     {
                         action = new CheckWeatherJson(log);
                     }
-                    list.Add(new Tuple<DataModel, Action, NotificationMethod>(new DataModel(item.ImgURL, item.Description, item.address), action, new NotificationMethod()));
+
+                    if (item.notification == "Email")
+                    {
+                        notificiation = new NotificationEmail(log);
+                    } else if (item.notification == "None")
+                    {
+                        notificiation = new NotificationNone();
+                    }
+                    list.Add(new Tuple<DataModel, Action, NotificationMethod>(new DataModel(item.ImgURL, item.Description, item.address), action, notificiation));
                 }
             }
         }
@@ -111,7 +118,7 @@ namespace JTTT
             list.Add(tmp);
             using (var context = new ModelContext())
             {
-                Model modeldb = new Model { ImgURL = model.ImgURL, Description = model.Description, address = model.address, action = action.ToString() };
+                Model modeldb = new Model { ImgURL = model.ImgURL, Description = model.Description, address = model.address, action = action.ToString() , notification = notificiation.getType()};
                 context.Model.Add(modeldb);
                 context.SaveChanges();
             }
@@ -152,7 +159,7 @@ namespace JTTT
             //all of this is to avoid changes in working code, and lack of time of course
             foreach (var element in list)
             {
-                DataModel exact = element.Item2.prepareEmail(element.Item1.address, element.Item1.Description, element.Item1.ImgURL);
+                DataModel exact = element.Item2.prepareEmail(element.Item1.address, element.Item1.Description, element.Item1.ImgURL); //element.Item2.prepareEmail(element.Item1.address, element.Item1.Description, element.Item1.ImgURL);
                 element.Item1.address = exact.address;
                 element.Item1.Description = exact.Description;
                 element.Item1.ImgURL = exact.ImgURL;

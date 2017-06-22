@@ -12,6 +12,11 @@ namespace JTTT
     {
         public virtual string notify(DataModel data_model) { /*string a = "base"; return a;*/ return null; }
 
+        public virtual string getType()
+        {
+            return "Method".ToString();
+        }
+
         public override string ToString()
         {
             return "".ToString();

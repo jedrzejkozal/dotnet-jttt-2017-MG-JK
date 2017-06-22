@@ -17,6 +17,7 @@ namespace JTTT
         public string address { get; set; }
         //Action
         public string action { get; set; }
+        public string notification { get; set; }
         //NotificationMethod
         //public System.Type nmtype { get; set; }
 

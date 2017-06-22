@@ -16,6 +16,10 @@ namespace JTTT
             throw ex;
         }
 
+        public override string getType()
+        {
+            return "None".ToString();
+        }
         public override string ToString()
         {
             return "".ToString();

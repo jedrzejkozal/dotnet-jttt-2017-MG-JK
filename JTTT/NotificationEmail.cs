@@ -32,6 +32,11 @@ namespace JTTT
             return retval;
         }
 
+        public override string getType()
+        {
+            return "Email".ToString();
+        }
+
         public override string notify(DataModel data_model)
         {
             string retval = null;

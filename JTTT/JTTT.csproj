@@ -61,6 +61,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -87,6 +88,10 @@
     <Compile Include="Migrations\201706211537387_model.cs" />
     <Compile Include="Migrations\201706211537387_model.Designer.cs">
       <DependentUpon>201706211537387_model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706221546252_add_notification_method.cs" />
+    <Compile Include="Migrations\201706221546252_add_notification_method.Designer.cs">
+      <DependentUpon>201706221546252_add_notification_method.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model.cs" />
@@ -116,6 +121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706211537387_model.resx">
       <DependentUpon>201706211537387_model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706221546252_add_notification_method.resx">
+      <DependentUpon>201706221546252_add_notification_method.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
